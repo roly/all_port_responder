@@ -13,13 +13,18 @@ s.listen(10)
 
 while True:
     csock, caddr = s.accept()
-    csockaddr_in = csock.getsockopt(socket.SOL_IP,
-                                      SO_ORIGINAL_DST, SOCKADDR_MIN)
-
-    (proto, port, a,b,c,d) = struct.unpack('!HHBBBB', sockaddr_in[:8])
+    csockaddr_in = csock.getsockopt(socket.SOL_IP,SO_ORIGINAL_DST, SOCKADDR_MIN)
+    (proto, port, a,b,c,d) = struct.unpack('!HHBBBB', csockaddr_in[:8])
+    
     ip = " "
     if socket.htons(proto) == socket.AF_INET : 
-          ip = '%d.%d.%d.%d ' % (a,b,c,d)
-    
-    try 
-        csock.send("Hello {}on port {} ({})".format(ip,port,proto).encode())
+          ip = '%d.%d.%d.%d ' % (a,b,c,d) 
+
+    try:
+        message = "Hello {} on TCP port {}\n".format(caddr[0],port)
+        print(message.strip())
+        csock.send(message.encode())
+        csock.close()
+    except socket.error:
+        pass
+
