@@ -21,8 +21,8 @@ while True:
           ip = '%d.%d.%d.%d ' % (a,b,c,d) 
 
     try:
-        message = "Hello {} ({}) on TCP port {}\n".format(caddr[0],socket.getnameinfo(caddr,0)[0],port)
-        print(message.strip())
+        message = "Hello {} ({}) on TCP port {} [c3e06bb0-bd57-464c-a6cc-76bf2bbaa238]\n".format(caddr[0],socket.getnameinfo(caddr,0)[0],port)
+        print(message.strip(),flush=True)
         csock.send(message.encode())
         csock.shutdown(socket.SHUT_RDWR)
         csock.close()
