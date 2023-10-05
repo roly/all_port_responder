@@ -1,0 +1,5 @@
+#!/bin/bash 
+
+iptables -t nat -D PREROUTING -p tcp --dport 1:65534  -j REDIRECT --to-port 65535
+iptables -t nat -D PREROUTING -p udp --dport 1:65534  -j REDIRECT --to-port 65535
+
