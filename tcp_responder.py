@@ -2,7 +2,6 @@
 
 import socket
 import struct
-from ipwhois import IPWhois
 from pprint import pprint
 
 SO_ORIGINAL_DST = 80
@@ -23,17 +22,8 @@ while True:
           ip = '%d.%d.%d.%d ' % (a,b,c,d) 
 
     try:
-        whois_info = ""
-        try: 
-            obj = IPWhois(caddr[0])
-            wr=obj.lookup_rdap(depth=1)
-            ni=wr['network']
-            whois_info= "{} {} {}".format(ni['cidr'],ni['country'],ni['remarks'][0]['description'].replace('\n', ' '))
-        except: 
-                pass
-        message = "Hello {} ({})[{}] on TCP port {} [76bf2bbaa238]\n".format(caddr[0],socket.getnameinfo(caddr,0)[0],whois_info,port)
         smallmsg = "Hello {} ({}) on TCP port {} [76bf2bbaa238]\n".format(caddr[0],socket.getnameinfo(caddr,0)[0],port)
-        print(message.strip(),flush=True)
+        print(smallmsg.strip(),flush=True)
         csock.send(smallmsg.encode())
         csock.shutdown(socket.SHUT_RDWR)
         csock.close()

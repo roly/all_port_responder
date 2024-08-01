@@ -5,9 +5,7 @@ After=multi-user.target
 [Service] 
 Type=simple 
 Restart=always 
-ExecStart=/home/ubuntu/all_port_responder/tcp_responder.py 
-StandardOutput=syslog 
-StandardError=syslog
+ExecStart=/usr/bin/tcpallportresponder 
 SyslogIdentifier=tcpallportresponder 
 
 

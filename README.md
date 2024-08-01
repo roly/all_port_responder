@@ -10,3 +10,9 @@ run the setup_iptables script
 it would be a good idea to then maybe install iptables-persistant afterwards 
 `sudo apt install iptables-persistent` 
 
+## install the service 
+
+first edit tcp_responder.service 
+
+sudo cp tcp_responder.service /etc/systemd/system/
+
